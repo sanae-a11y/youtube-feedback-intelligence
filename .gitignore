@@ -1,0 +1,13 @@
+.env
+.env.local
+backend/.env
+frontend/.env.local
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+backend/venv/
+venv/
+__pycache__/
+*.pyc
+*.log
