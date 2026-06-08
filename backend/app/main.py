@@ -7,16 +7,26 @@ from app.routes.analyze import router as analyze_router
 load_dotenv()
 
 app = FastAPI(title="YouTube Feedback Intelligence API", version="0.1.0")
-origin = os.getenv("FRONTEND_ORIGIN", "http://localhost:3000")
+# origin = os.getenv("FRONTEND_ORIGIN", "http://localhost:3000")
  
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=[
+#         "http://localhost:3000",
+#         "http://127.0.0.1:3000",
+#         "http://192.168.1.107:3000",
+#     ],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+origin = os.getenv("FRONTEND_ORIGIN", "*")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://192.168.1.107:3000",
-    ],
-    allow_credentials=True,
+    allow_origins=["*"] if origin == "*" else [origin],
+    allow_credentials=False if origin == "*" else True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
